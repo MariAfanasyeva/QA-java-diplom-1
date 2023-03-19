@@ -3,17 +3,19 @@ import org.junit.Test;
 import praktikum.Bun;
 
 public class BunTest {
-    Bun bun = new Bun("summer",666); //создаем тестовую булочку саммер
+    private final float bun_price = 666;
+    Bun bun = new Bun("summer", bun_price); //создаем тестовую булочку саммер
+
     //тест для метода получения наименования Булочки
     @Test
-    public void checkForReturnabilityOfBunName(){
+    public void checkForReturnabilityOfBunName() {
         Assert.assertEquals("summer", bun.getName());
     }
 
 
     //тест для метода получения стоимости Булочки
     @Test
-    public void checkForReturnabilityOfBunPrice(){
-        Assert.assertEquals(666, bun.getPrice(),0);
+    public void checkForReturnabilityOfBunPrice() {
+        Assert.assertEquals(bun_price, bun.getPrice(), 0);
     }
 }

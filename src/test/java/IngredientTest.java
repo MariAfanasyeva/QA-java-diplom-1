@@ -16,9 +16,10 @@ public class IngredientTest {
         this.name = name;
         this.price = price;
     }
-    @Parameterized.Parameters
-    public static Object[][] getTestData(){
-        return new Object[][] {
+
+    @Parameterized.Parameters(name = "Состав ингридиентов бургера: соус и начинка. Тестовые данные: {0} {1}")
+    public static Object[][] getTestData() {
+        return new Object[][]{
                 {IngredientType.SAUCE, "morty's chocolate dreams", 77},
                 {IngredientType.FILLING, "cucumber Rick", 777},
         };
@@ -26,7 +27,7 @@ public class IngredientTest {
 
     @Test
     //проверяем состав нашего бургера
-    public void checkForIngredientsComposition(){
+    public void checkForIngredientsComposition() {
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
         Assert.assertEquals(ingredientType, ingredient.getType());
         Assert.assertEquals(name, ingredient.getName());

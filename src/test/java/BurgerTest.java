@@ -9,7 +9,6 @@ import praktikum.Burger;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
 import resources.ExpectReceipt;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,41 +21,46 @@ public class BurgerTest {
     Bun bun;
 
     Burger burger = new Burger();
+    @Mock
+    Ingredient ingredient1;
+    Ingredient ingredient2;
+    @Mock
+    Bun summer;
 
     @Test
     //проверяем булочки
-    public void checkForBuns(){
+    public void checkForBuns() {
         burger.setBuns(bun);
         Assert.assertEquals(bun, burger.bun);
     }
 
     //проверяем метод добавления Ингридиента
     @Test
-    public void checkForAddingIngredient(){
+    public void checkForAddingIngredient() {
         burger.addIngredient(ingredient);
         Assert.assertTrue(burger.ingredients.contains(ingredient));
     }
+
     //проверяем метод удаления Ингридиента
     @Test
-    public void checkForRemovingIngredient(){
+    public void checkForRemovingIngredient() {
         burger.addIngredient(ingredient);
         burger.removeIngredient(0);
         Assert.assertFalse(burger.ingredients.contains(ingredient));
     }
-    @Mock
-    Ingredient ingredient1;
-    Ingredient ingredient2;
+
     //проверяем метод перемещения Ингридиентов (меняем местами)
     @Test
-    public void checkForMovingIngredients(){
+    public void checkForMovingIngredients() {
         burger.addIngredient(ingredient1);
         burger.addIngredient(ingredient2);
-        burger.moveIngredient(0,1);
+        burger.moveIngredient(0, 1);
         Assert.assertEquals(ingredient1, burger.ingredients.get(1));
     }
+
     //проверяем метод расчета стоимости
     @Test
-    public void checkForGettingPrice(){
+    public void checkForGettingPrice() {
         float expectPrice = 555F;
         Mockito.when(bun.getPrice()).thenReturn(200F);
         Mockito.when(ingredient.getPrice()).thenReturn(155F);
@@ -65,11 +69,9 @@ public class BurgerTest {
         Assert.assertEquals(expectPrice, burger.getPrice(), 0);
     }
 
-    @Mock
-    Bun summer;
     //проверяем распечатывание чека (вывод) с информацией о рецепте
     @Test
-    public void checkForGettingReceipt(){
+    public void checkForGettingReceipt() {
         //собираем ингридиенты
         burger.addIngredient(ingredient);
         burger.setBuns(summer);
@@ -81,6 +83,6 @@ public class BurgerTest {
         testBurgerIngredients.add("tasty banana bun");
         testBurgerIngredients.add("mulan's sichuan's sauce");
         ExpectReceipt expectBurger = new ExpectReceipt();
-        Assert.assertTrue(expectBurger.buildExpectReceipt(testBurgerIngredients, 0).equals(burger.getReceipt()));
+        Assert.assertEquals(expectBurger.buildExpectReceipt(testBurgerIngredients, 0), burger.getReceipt());
     }
 }
